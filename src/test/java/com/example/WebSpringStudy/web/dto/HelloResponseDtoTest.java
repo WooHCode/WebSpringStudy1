@@ -1,8 +1,10 @@
 package com.example.WebSpringStudy.web.dto;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class HelloResponseDtoTest {
     @Test

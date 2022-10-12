@@ -1,9 +1,16 @@
 package com.example.WebSpringStudy.web;
 
+import com.example.WebSpringStudy.config.auth.CustomOAuth2UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.is;
@@ -13,11 +20,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = HelloController.class)
+@AutoConfigureMockMvc
+@MockBean(JpaMetamodelMappingContext.class)
 public class HelloControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
+    @MockBean
+    CustomOAuth2UserService customOAuth2UserService;
+    ClientRegistrationRepository clientRegistrationRepository;
+    WebSecurityConfiguration webSecurityConfiguration;
+
+    @WithMockUser(roles = "USER")
     @Test
     public void hello가_리턴된다() throws Exception{
         String hello = "hello";
@@ -28,6 +43,7 @@ public class HelloControllerTest {
 
     }
 
+    @WithMockUser(roles = "USER")
     @Test
     public void helloDto가_리턴된다() throws Exception{
         String name ="hello";
