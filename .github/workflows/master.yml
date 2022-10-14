@@ -1,6 +1,8 @@
 env:  
   S3_BUCKET_NAME: woobuild 
-  PROJECT_NAME: WebSpringStudy1 
+  PROJECT_NAME: WebSpringStudy1
+  CODE_DEPLOY_APP_NAME: WebSpringStudy
+  CODE_DEPLOY_GROUP_NAME: WebSpringStudy-group
 
 name: deploy
 
